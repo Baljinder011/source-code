@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Updated Slider</title>
+  <style>
+    :root {
+      --font-family: 'Poppins', sans-serif;
+      --text-color: #ffffff;
+      --accent-color: #f7b32b;
+      --bg-color: #1a1a1a;
+      --transition-speed-fast: 0.5s;
+      --transition-speed-slow: 1s;
+      --cubic-bezier: cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+
+
+
+
+
+    .uni-slider-wrapper {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .uni-hero-slider {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .uni-slides-container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    .uni-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      transition: transform var(--transition-speed-slow) var(--cubic-bezier);
+    }
+
+    .uni-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .uni-slider-content {
+      position: absolute;
+      bottom: 20%;
+      left: 4rem;
+      z-index: 10;
+      max-width: 45%;
+    }
+
+    .uni-content-text {
+      position: relative;
+    }
+
+    .uni-content-text > * {
+      transition: transform 0.6s var(--cubic-bezier), opacity 0.6s var(--cubic-bezier);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .uni-content-text.animating-out > * {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .uni-location-region {
+      font-weight: 400;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .uni-location-title {
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .uni-location-description {
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 450px;
+      margin-bottom: 2rem;
+    }
+
+    .uni-discover-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50px;
+      color: var(--text-color);
+      padding: 0.75rem 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .uni-discover-btn::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+
+    .uni-slider-navigation {
+      position: absolute;
+      bottom: 5%;
+      right: 4rem;
+      z-index: 10;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .uni-thumbnail-carousel {
+      max-width: calc(4 * (120px + 15px));
+      overflow: hidden;
+    }
+
+    .uni-thumbnail-wrapper {
+      display: flex;
+      gap: 15px;
+      transition: transform var(--transition-speed-fast) ease-in-out;
+    }
+
+    .uni-thumbnail-card {
+      min-width: 120px;
+      height: 170px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .uni-thumbnail-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      transition: background 0.3s;
+    }
+
+    .uni-thumbnail-card:hover::after {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+    }
+
+    .uni-thumbnail-title {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .uni-controls-container {
+      display: flex;
+      align-items: center;
+      padding-left: 2rem;
+      height: 170px;
+      align-items: flex-end;
+      padding-bottom: 2rem;
+    }
+
+    .uni-nav-arrow {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      color: var(--text-color);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+
+    .uni-nav-arrow:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .uni-next-arrow {
+      margin: 0 1.5rem;
+    }
+
+    .uni-progress-bar-container {
+      width: 100px;
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.3);
+      position: relative;
+    }
+
+    .uni-progress-bar {
+      height: 100%;
+      background-color: var(--accent-color);
+      width: 0;
+      transition: width var(--transition-speed-fast) ease-in-out;
+    }
+
+    .uni-slide-counter {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-left: 1.5rem;
+      line-height: 1;
+    }
+
+    .uni-current-slide-num {
+      display: inline-block;
+      min-width: 45px;
+      text-align: right;
+    }
+  </style>
+</head>
+
+
+
+<body>
+  <div class="uni-slider-wrapper">
+    <main class="uni-hero-slider">
+      <div class="uni-slides-container"></div>
+      <div class="uni-slider-content">
+        <div class="uni-content-text">
+          <h3 class="uni-location-region"></h3>
+          <h1 class="uni-location-title"></h1>
+          <p class="uni-location-description">Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero.</p>
+          <button class="uni-discover-btn">
+            <span>DISCOVER LOCATION</span>
+          </button>
+        </div>
+      </div>
+      <div class="uni-slider-navigation">
+        <div class="uni-thumbnail-carousel">
+          <div class="uni-thumbnail-wrapper"></div>
+        </div>
+        <div class="uni-controls-container">
+          <button class="uni-nav-arrow uni-prev-arrow">&#8592;</button>
+          <button class="uni-nav-arrow uni-next-arrow">&#8594;</button>
+          <div class="uni-progress-bar-container">
+            <div class="uni-progress-bar"></div>
+          </div>
+          <div class="uni-slide-counter">
+            <span class="uni-current-slide-num"></span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slidesData = [
+        { region: 'Switzerland Alps', title: 'Saint Ant\u00f6nien', image: '/Images/mount.jpg', thumbnail: "/Images/mount.jpg" },
+        { region: 'Japan Alps', title: 'Nagano Prefecture', image: '/Images/rain.jpg', thumbnail: "/Images/rain.jpg" },
+        { region: 'Sahara Desert - Morocco', title: 'Marrakech Merzouga', image: '/Images/lightning.jpg', thumbnail: "/Images/lightning.jpg" },
+        { region: 'Sierra Nevada - United States', title: 'Yosemite National Park', image: '/Images/mount.jpg', thumbnail: "/Images/mount.jpg" },
+        { region: 'Tarifa - Spain', title: 'Los Lances Beach', image: '/Images/rain.jpg', thumbnail: "/Images/rain.jpg" },
+        { region: 'Cappadocia - Turkey', title: 'G\u00f6reme Valley', image: '/Images/lightning.jpg', thumbnail: "/Images/lightning.jpg" },
+        { region: 'Cappadocia - Turkey', title: 'G\u00f6reme Valley', image: '/Images/mount.jpg', thumbnail: "/Images/rain.jpg" }
+      ];
+
+      const slidesContainer = document.querySelector('.uni-slides-container');
+      const thumbnailWrapper = document.querySelector('.uni-thumbnail-wrapper');
+      const contentText = document.querySelector('.uni-content-text');
+      const locationRegion = document.querySelector('.uni-location-region');
+      const locationTitle = document.querySelector('.uni-location-title');
+      const prevBtn = document.querySelector('.uni-prev-arrow');
+      const nextBtn = document.querySelector('.uni-next-arrow');
+      const progressBar = document.querySelector('.uni-progress-bar');
+      const currentSlideNum = document.querySelector('.uni-current-slide-num');
+
+      let currentIndex = 0;
+      let slides = [];
+      let autoPlayInterval;
+
+      function init() {
+        slidesData.forEach((data, index) => {
+          const slide = document.createElement('div');
+          slide.classList.add('uni-slide');
+          slide.style.backgroundImage = `url('${data.image}')`;
+          slidesContainer.appendChild(slide);
+          slides.push(slide);
+
+          const thumbnail = document.createElement('div');
+          thumbnail.classList.add('uni-thumbnail-card');
+          thumbnail.style.backgroundImage = `url('${data.thumbnail}')`;
+          thumbnail.innerHTML = `<h3 class="uni-thumbnail-title">${data.title}</h3>`;
+          thumbnail.addEventListener('click', () => {
+            goToSlide(index);
+            resetAutoPlay();
+          });
+          thumbnailWrapper.appendChild(thumbnail);
+        });
+
+        goToSlide(0, true);
+        startAutoPlay();
+      }
+
+      function goToSlide(index, isInitial = false) {
+        if (index < 0) index = slidesData.length - 1;
+        else if (index >= slidesData.length) index = 0;
+
+        const oldIndex = currentIndex;
+        currentIndex = index;
+        contentText.classList.add('animating-out');
+        setTimeout(() => {
+          updateContent();
+          contentText.classList.remove('animating-out');
+        }, 600);
+
+        const direction = isInitial ? 0 : (currentIndex > oldIndex || (oldIndex === slidesData.length - 1 && currentIndex === 0) ? 1 : -1);
+
+        if (!isInitial) {
+          const currentSlide = slides[oldIndex];
+          const nextSlide = slides[currentIndex];
+          nextSlide.style.transform = `translateX(${100 * direction}%)`;
+          nextSlide.style.transition = 'none';
+          nextSlide.offsetHeight;
+          nextSlide.style.transition = 'transform var(--transition-speed-slow) var(--cubic-bezier)';
+          currentSlide.style.transform = `translateX(${-100 * direction}%)`;
+          nextSlide.style.transform = 'translateX(0)';
+        } else {
+          slides.forEach((slide, i) => {
+            slide.style.transform = `translateX(${(i - currentIndex) * 100}%)`;
+          });
+        }
+
+        updateUI();
+      }
+
+      function updateContent() {
+        const data = slidesData[currentIndex];
+        locationRegion.textContent = data.region;
+        locationTitle.textContent = data.title;
+      }
+
+      function updateUI() {
+        const thumbnailWidth = 120;
+        const thumbnailGap = 15;
+        const scrollAmount = currentIndex * (thumbnailWidth + thumbnailGap);
+        thumbnailWrapper.style.transform = `translateX(-${scrollAmount}px)`;
+
+        const progress = ((currentIndex + 1) / slidesData.length) * 100;
+        progressBar.style.width = `${progress}%`;
+        currentSlideNum.textContent = String(currentIndex + 1).padStart(2, '0');
+      }
+
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+          goToSlide(currentIndex + 1);
+        }, 5000);
+      }
+
+      function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+      }
+
+      nextBtn.addEventListener('click', () => {
+        goToSlide(currentIndex + 1);
+        resetAutoPlay();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        goToSlide(currentIndex - 1);
+        resetAutoPlay();
+      });
+
+      init();
+    });
+  </script>
+</body>
+
+</html>

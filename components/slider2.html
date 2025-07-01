@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* section 4 */
+
+.section4-scroll-wrapper {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #888787 0%, #c5c5c5 100%);
+}
+
+.section4-horizontal-scroll {
+  display: flex;
+  height: 100vh;
+}
+
+.section4-slide {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 0 5vw;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.section4-hero-content {
+  z-index: 2;
+}
+
+.section4-hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #1d1b1b 0%, #818181 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section4-hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: #000;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.section4-cta-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.section4-btn-primary {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+}
+
+.section4-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.section4-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+}
+
+.section4-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+.section4-phone-mockup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section4-phone-container {
+  background: linear-gradient(145deg, #2c3e50, #34495e);
+  border-radius: 40px;
+  padding: 25px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3),
+              inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  width: 300px;
+  height: 500px;
+  transform: perspective(1000px) rotateY(-15deg);
+}
+
+.section4-phone-screen {
+  background: #000;
+  border-radius: 35px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.section4-phone-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 35px;
+}
+
+@media (max-width: 1024px) {
+  .section4-slide {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 8vw;
+    text-align: center;
+  }
+
+  .section4-phone-mockup {
+    margin-top: 2rem;
+  }
+  .section4-hero-content{
+    text-align: start;
+  }
+  .section4-cta-buttons {
+    justify-content: start;
+  }
+}
+
+@media (max-width: 480px) {
+  .section4-phone-container {
+    width: 220px;
+    height: 400px;
+    transform: none;
+  }
+   .section4-slide {
+    grid-template-columns: 1fr;
+    padding: 0 8vw;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+}
+
+    </style>
+</head>
+
+
+
+<body>
+    
+<!-- section 4 -->
+<div class="section4-scroll-wrapper" id="section5">
+  <div class="section4-horizontal-scroll">
+    <!-- Slide 1 -->
+    <section class="section4-slide">
+      <div class="section4-hero-content">
+        <h1 class="section4-hero-title">Build Amazing Mobile Apps</h1>
+        <p class="section4-hero-subtitle">Get professional source code with authentication, real-time data, push notifications, and scalable architecture.</p>
+        <div class="section4-cta-buttons">
+          <button  class="section4-btn-primary start-trial-btn">🚀 Get Source Code</button>
+          <!-- <a href="#features" class="section4-btn-secondary">Learn More</a> -->
+        </div>
+      </div>
+      <div class="section4-phone-mockup">
+        <div class="section4-phone-container">
+          <div class="section4-phone-screen">
+            <img src="https://via.placeholder.com/300x600.png?text=App+Screen" alt="Mobile App Screenshot" class="section4-phone-image">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="section4-slide">
+      <div class="section4-hero-content">
+        <h1 class="section4-hero-title">Build Amazing Mobile Apps</h1>
+        <p class="section4-hero-subtitle">Get professional source code with authentication, real-time data, push notifications, and scalable architecture.</p>
+        <div class="section4-cta-buttons">
+          <button  class="section4-btn-primary start-trial-btn">🚀 Get Source Code</button>
+          <!-- <a href="#features" class="section4-btn-secondary">Learn More</a> -->
+        </div>
+      </div>
+      <div class="section4-phone-mockup">
+        <div class="section4-phone-container">
+          <div class="section4-phone-screen">
+            <img src="https://via.placeholder.com/300x600.png?text=App+Screen" alt="Mobile App Screenshot" class="section4-phone-image">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="section4-slide">
+      <div class="section4-hero-content">
+        <h1 class="section4-hero-title">Build Amazing Mobile Apps</h1>
+        <p class="section4-hero-subtitle">Get professional source code with authentication, real-time data, push notifications, and scalable architecture.</p>
+        <div class="section4-cta-buttons">
+          <button  class="section4-btn-primary start-trial-btn">🚀 Get Source Code</button>
+          <!-- <a href="#features" class="section4-btn-secondary">Learn More</a> -->
+        </div>
+      </div>
+      <div class="section4-phone-mockup">
+        <div class="section4-phone-container">
+          <div class="section4-phone-screen">
+            <img src="https://via.placeholder.com/300x600.png?text=App+Screen" alt="Mobile App Screenshot" class="section4-phone-image">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Update GSAP Script -->
+<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  const sections = gsap.utils.toArray(".section4-slide");
+  const wrapper = document.querySelector(".section4-horizontal-scroll");
+  const totalSlides = sections.length;
+
+  gsap.to(wrapper, {
+    xPercent: -100 * (totalSlides - 1), // 👈 scroll left ➡ right
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".section4-scroll-wrapper",
+      pin: true,
+      scrub: 1,
+      snap: 1 / (totalSlides - 1),
+      start: "top top",
+      end: () => "+=" + window.innerWidth * totalSlides, // 👈 ensures enough scroll length
+    }
+  });
+</script>
+
+
+
+<script>
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.classList.contains('start-trial-btn')) {
+      openPopup();
+    }
+  });
+</script>
+
+</body>
+</html>

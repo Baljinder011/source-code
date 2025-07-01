@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit  Form</title>
+    <style>    
+       .main-wrapper {
+            background-color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .main-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(177, 177, 179, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(180, 179, 178, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .form-container {
+            display: flex;
+            background: 
+                linear-gradient(135deg, transparent 0%, transparent 20%, rgba(255, 154, 158, 0.3) 25%, rgba(255, 154, 158, 0.3) 35%, transparent 40%, transparent 100%),
+                linear-gradient(125deg, transparent 0%, transparent 30%, rgba(254, 207, 239, 0.3) 35%, rgba(254, 207, 239, 0.3) 45%, transparent 50%, transparent 100%),
+                linear-gradient(115deg, transparent 0%, transparent 40%, rgba(199, 215, 255, 0.3) 45%, rgba(199, 215, 255, 0.3) 55%, transparent 60%, transparent 100%),
+                linear-gradient(105deg, transparent 0%, transparent 50%, rgba(168, 230, 207, 0.3) 55%, rgba(168, 230, 207, 0.3) 65%, transparent 70%, transparent 100%),
+                linear-gradient(95deg, transparent 0%, transparent 60%, rgba(255, 216, 155, 0.3) 65%, rgba(255, 216, 155, 0.3) 75%, transparent 80%, transparent 100%),
+                linear-gradient(85deg, transparent 0%, transparent 70%, rgba(255, 204, 203, 0.3) 75%, rgba(255, 204, 203, 0.3) 85%, transparent 90%, transparent 100%),
+                rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            /* box-shadow: 0 25px 45px rgba(46, 91, 186, 0.1); */
+            box-shadow: 0 25px 45px #534d4d6e;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            max-width: 1200px;
+            width: 100%;
+            min-height: 600px;
+        }
+
+        .hero-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .robot-avatar {
+            width: 400px;
+            height: 500px;
+            border-radius: 20px;
+            position: relative;
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            z-index: 1;
+        }
+
+        .robot-avatar img {
+            width: 100%;
+            margin: auto;
+            align-items: center;
+        }
+
+        .form-panel {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            max-width: 600px;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+        .logo-fm img {
+            width: 100%;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .input-row .input-group {
+            flex: 1;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(46, 91, 186, 0.3);
+            border-radius: 10px;
+            color: #1E3A8A;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #FF8A4C;
+            box-shadow: 0 0 20px rgba(255, 138, 76, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .input-field::placeholder {
+            color: rgba(30, 58, 138, 0.6);
+        }
+
+        select.input-field {
+            cursor: pointer;
+        }
+
+        select.input-field option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .primary-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(131, 56, 236, 0.4);
+        }
+
+        .primary-button:active {
+            transform: translateY(0);
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-button {
+            flex: 1;
+            padding: 12px;
+            background: rgba(56, 56, 56, 0.1);
+            border: 1px solid rgba(48, 47, 47, 0.2);
+            border-radius: 8px;
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .social-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .separator {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            color: #000;
+            font-size: 12px;
+        }
+
+        .separator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(46, 45, 45, 0.2);
+            z-index: 1;
+        }
+
+        .separator span {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #000;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #FF8A4C;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 1024px) {
+            .form-container {
+                max-width: 900px;
+            }
+
+            .robot-avatar {
+                width: 300px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-wrapper {
+                padding: 15px;
+            }
+
+            .form-container {
+                flex-direction: column;
+                max-width: 500px;
+                margin: 10px;
+                min-height: auto;
+            }
+.form-title{
+    display: none;
+}
+            .hero-panel {
+                min-height: 200px;
+                padding: 20px;
+            }
+
+            .robot-avatar {
+                width: 150px;
+                height: 180px;
+            }
+
+            .form-panel {
+                padding: 30px 25px;
+            }
+
+            .logo-fm {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 15px;
+            }
+
+            .logo-fm img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .input-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .social-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 10px;
+            }
+
+            .form-container {
+                margin: 0;
+                border-radius: 15px;
+                max-width: 100%;
+            }
+
+            .form-panel {
+                padding: 25px 20px;
+            }
+
+            .logo-fm {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 10px;
+            }
+
+            .logo-fm img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .input-field {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+
+            .primary-button {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .social-button {
+                padding: 10px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .form-panel {
+                padding: 20px 15px;
+            }
+
+            .input-field {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            .primary-button {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .logo-fm {
+                width: 45px;
+                height: 45px;
+            }
+
+            .logo-fm img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        /* Landscape orientation for tablets */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .form-container {
+                flex-direction: row;
+                max-width: 100%;
+                min-height: 500px;
+            }
+
+            .hero-panel {
+                flex: 0.7;
+            }
+
+            .form-panel {
+                flex: 1.3;
+                padding: 20px 30px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-height: 600px) and (max-width: 768px) {
+            .main-wrapper {
+                padding: 5px;
+                align-items: flex-start;
+            }
+
+            .form-container {
+                margin-top: 10px;
+                min-height: auto;
+            }
+
+            .hero-panel {
+                min-height: 120px;
+                padding: 10px;
+            }
+
+            .robot-avatar {
+                width: 100px;
+                height: 120px;
+            }
+
+            .form-panel {
+                padding: 20px;
+            }
+        }
+
+@media (max-width: 360px) {
+    .form-panel {
+        padding: 15px 10px;
+    }
+
+    .input-field {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .primary-button {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .social-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .social-button img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .separator span {
+        padding: 0 10px;
+        font-size: 11px;
+    }
+
+    .logo-fm img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .input-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .robot-avatar {
+        width: 100px;
+        height: 120px;
+    }
+
+    .form-title {
+        margin-bottom: 20px;
+        display: none;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="form-container">
+            <div class="hero-panel">
+                <div class="robot-avatar">
+                    <img src="/Images/mount.jpg" alt="img" />
+                </div>
+            </div>
+
+            <div class="form-panel">
+                <div class="form-title">
+                    <div class="logo-fm">
+                        <img src="./Images/indraq-new.png" alt="logo-fm" />
+                    </div>
+                </div>
+
+                <form id="registrationForm">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <input type="text" class="input-field" placeholder="First Name" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="input-field" placeholder="Last Name" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" class="input-field" placeholder="Email Address" required>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="tel" class="input-field" placeholder="Phone Number" required>
+                    </div>
+
+                    <div class="input-group">
+                        <select class="input-field" required>
+                            <option value="">Select Product</option>
+                            <option value="premium">Premium Plan</option>
+                            <option value="business">Business Plan</option>
+                            <option value="enterprise">Enterprise Plan</option>
+                            <option value="basic">Basic Plan</option>
+                            <option value="pro">Pro Plan</option>
+                            <option value="starter">Starter Pack</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="primary-button">Submit</button>
+                </form>
+
+                <div class="separator">
+                    <span>or continue with</span>
+                </div>
+
+                <div class="social-buttons">
+                    <a href="#" class="social-button" aria-label="Login with Google">
+                        <img src="/Images/google.svg" width="24" height="24" />
+                    </a>
+                    <a href="#" class="social-button" aria-label="Login with Apple">
+                        <img src="/Images/apple.svg" width="24" height="24" />
+                    </a>
+                    <a href="#" class="social-button" aria-label="Login with Facebook">
+                        <img src="/Images/fb.svg" width="24" height="24" />
+                    </a>
+                </div>
+
+
+                <!-- <div class="signup-link">
+                    Don't have an account? <a href="#">Create Account</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+ 
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { 
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .popup-box {
+      background: linear-gradient(145deg, #ffffff, #f8f9fa);
+      width: 90%;
+      max-width: 550px;
+      padding: 40px;
+      border-radius: 20px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideIn 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .close-bttn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #666;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .close-bttn:hover {
+      background: #ff4757;
+      color: white;
+      transform: rotate(90deg);
+    }
+
+    .stepper {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0 40px 0;
+      position: relative;
+    }
+
+    .stepper::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 25%;
+      right: 25%;
+      height: 3px;
+      background: linear-gradient(90deg, #ddd 50%, #FF8C42 50%);
+      z-index: 1;
+    }
+
+    .step {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #ddd;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+      margin: 0 20px;
+    }
+
+    .step.active {
+background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%);
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+    }
+
+    .step span {
+      position: absolute;
+      top: 55px;
+      font-size: 12px;
+      color: #666;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .step.active span {
+      color: #666;
+      font-weight: 600;
+    }
+
+    .form-step {
+      text-align: left;
+      animation: slideIn 0.3s ease;
+    }
+
+    .form-step label {
+      display: block;
+      font-weight: 600;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      font-size: 14px;
+    }
+
+    .form-step input,
+    .form-step select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e1e8ed;
+      border-radius: 12px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      background: #fff;
+      outline: none;
+    }
+
+    .form-step input:focus,
+    .form-step select:focus {
+      border-color: #4ecdc4;
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+      transform: translateY(-1px);
+    }
+
+    input[readonly] {
+      background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+      cursor: not-allowed;
+      color: #666;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row>div {
+      flex: 1;
+    }
+
+    .next-btn {
+      width: 100%;
+      margin-top: 30px;
+background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%);
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+    }
+
+    .next-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(78, 205, 196, 0.4);
+    }
+
+    .otp-buttons button {
+      width: 100%;
+      padding: 14px;
+background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 15px 0;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .otp-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    .success-message {
+      margin-top: 12px;
+      color: #FF8C42;
+      font-weight: 600;
+      display: none;
+      padding: 10px;
+      background: rgba(39, 174, 96, 0.1);
+      border-radius: 8px;
+      border-left: 4px solid #27ae60;
+    }
+
+    .input-error {
+      border-color: #FF8C42 !important;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
+      animation: shake 0.5s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .error-msg {
+      color: #FF8C42;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+      text-align: left;
+      padding: 5px 10px;
+      background: rgba(231, 76, 60, 0.1);
+      border-radius: 6px;
+      border-left: 3px solid #FF8C42;
+    }
+
+    #otpSection {
+      background: linear-gradient(145deg, #f8f9fa, #ffffff);
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 20px;
+      border: 2px dashed #FF8C42;
+    }
+
+    #otpResultCard {
+      background: linear-gradient(145deg, #ffffff, #f8f9fa);
+      border-radius: 20px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #otpResultCard img {
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+      margin-bottom: 15px;
+    }
+
+    #otpResultCard h2 {
+      margin: 15px 0 10px 0;
+      font-weight: 700;
+    }
+
+    #otpResultCard p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    #webhookErrorContainer {
+      background: rgba(231, 76, 60, 0.1);
+      border: 2px solid #FF8C42;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    #webhookErrorContainer h3 {
+      margin-top: 0;
+      color: #FF8C42;
+    }
+
+    pre {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .popup-box {
+        width: 95%;
+        padding: 25px;
+        margin: 10px;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .stepper {
+        margin: 20px 0 30px 0;
+      }
+      
+      .step {
+        margin: 0 10px;
+      }
+    }
+
+    /* Loading animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #otpLoader img {
+      animation: spin 2s linear infinite;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <button class="start-trial-btn">✨ Start Your Journey</button>
+
+
+  <div id="popup" class="popup-overlay">
+    <div class="popup-box">
+      <span class="close-bttn" onclick="closePopup()">×</span>
+
+      <div class="stepper">
+        <div class="step step-item-1 active">1<br><span>Company Info</span></div>
+        <div class="step step-item-2">2<br><span>Admin Contact</span></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="form-step step-1">
+        <div class="form-row">
+          <div>
+            <label>👤 Full Name*</label>
+            <input type="text" id="CompanyFullName" placeholder="Enter Full Name" />
+            <p id="err_CompanyFullName" class="error-msg">Required</p>
+          </div>
+          <div>
+            <label>📧 Email ID</label>
+            <input type="email" id="adminEmail" placeholder="Enter Email Address" />
+            <p id="err_adminEmail" class="error-msg">Required</p>
+          </div>
+        </div>
+
+        <label>🏢 Address*</label>
+        <input type="text" id="CompanyAddress" placeholder="Enter Address" />
+        <p id="err_CompanyAddress" class="error-msg">Required</p>
+
+        <div class="form-row">
+          <div>
+            <label>📍 Pin Code*</label>
+            <input type="text" id="CompanyCity" placeholder="Enter Pin Code" />
+            <p id="err_CompanyCity" class="error-msg">Required</p>
+          </div>
+          <div>
+            <label>🌍 Country*</label>
+            <input type="text" id="CompanyState" placeholder="Country" readonly />
+            <p id="err_CompanyState" class="error-msg">Required</p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label>🗺️ State*</label>
+            <input type="text" id="CompanyStateName" placeholder="State" readonly />
+            <p id="err_CompanyStateName" class="error-msg">Required</p>
+          </div>
+          <div>
+            <label>🏙️ City*</label>
+            <input type="text" id="CompanyCityName" placeholder="City" readonly />
+            <p id="err_CompanyCityName" class="error-msg">Required</p>
+          </div>
+        </div>
+
+        <button class="next-btn" onclick="goToStep2()">Next Step ➜</button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="form-step step-2" style="display:none;">
+        <label>📱 Mobile Number</label>
+        <input type="tel" id="adminMobile" placeholder="Enter 10-digit Mobile Number" maxlength="10"
+          pattern="\d{10}" oninput="this.value = this.value.replace(/\D/g, '')" />
+        <p id="mobileError" class="error-msg">Required</p>
+
+        <label>📦 Select Product*</label>
+        <select class="input-field" id="productPlan" required>
+          <option value="">Select Product</option>
+          <option value="premium">🏆 Premium Plan</option>
+          <option value="business">💼 Business Plan</option>
+          <option value="enterprise">🏢 Enterprise Plan</option>
+          <option value="basic">📦 Basic Plan</option>
+          <option value="pro">⭐ Pro Plan</option>
+          <option value="starter">🚀 Starter Pack</option>
+        </select>
+        <p id="nameError" class="error-msg">Required</p>
+
+        <div class="otp-buttons">
+          <button onclick="sendConditionalOtp()">🔐 Send OTP</button>
+        </div>
+
+        <div id="otpSection" style="display: none;">
+          <label>🔑 Enter OTP*</label>
+          <input type="text" id="unifiedOtpInput" placeholder="6-digit OTP" maxlength="6" />
+          <p id="otpStatus" class="success-message">OTP sent successfully!</p>
+          <p id="formSubmitStatus" class="success-message" style="display: none;"></p>
+          <button class="next-btn" onclick="verifyUnifiedOtp()">✅ Verify OTP</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTP Result Card -->
+  <div id="otpResultCard"
+    style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: white; padding: 40px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; z-index: 9999;">
+ <span onclick="closeOtpResultCard()" style="
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+    z-index: 99999;">&times;</span>
+
+
+<div id="otpLoader" style="display: block;">
+  <img src="https://cdn-icons-png.flaticon.com/512/189/189792.png" width="80" />
+  <h2 style="color: #333;">Verifying...</h2>
+  <p>🔄 Please wait while we verify your OTP.</p>
+</div>
+
+
+    <div id="otpSuccess" style="display: none;">
+      <img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" width="80" />
+      <h2 style="color: green;">Successful!</h2>
+      <p>Your mobile number has been successfully verified.</p>
+    </div>
+
+    <div id="otpFail" style="display: none;">
+      <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" width="80" />
+      <h2 style="color: red;">Failed!</h2>
+      <p>OTP verification failed. Please try again.</p>
+      <pre id="failedUserData"
+        style="font-size: 12px; color: #444; text-align: left; background: #f8f8f8; padding: 10px;"></pre>
+    </div>
+  </div>
+
+<!-- <div id="webhookErrorContainer">
+  <h3 style="color: red;">Submission Failed!</h3>
+  <p>Please Contact Admin: <strong>7245678796</strong></p>
+  <pre id="webhookErrorMessage">Webhook submission failed. Please try again or contact support.</pre>
+</div> -->
+
+
+
+  <script>
+    function openPopup() {
+      document.getElementById('popup').style.display = 'flex';
+      showStep(1);
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+function closeOtpResultCard() {
+  document.getElementById("otpResultCard").style.display = "none";
+}
+
+    function showStep(step) {
+      document.querySelectorAll('.form-step').forEach(el => el.style.display = 'none');
+      document.querySelector(`.step-${step}`).style.display = 'block';
+      document.querySelectorAll('.step').forEach((el, idx) => {
+        el.classList.toggle('active', idx + 1 === step);
+      });
+    }
+
+    function goToStep2() {
+      const fields = ['CompanyFullName', 'adminEmail', 'CompanyAddress', 'CompanyCity', 'CompanyState', 'CompanyStateName', 'CompanyCityName'];
+      let allValid = true;
+
+      fields.forEach(id => {
+        const input = document.getElementById(id);
+        const error = document.getElementById(`err_${id}`);
+
+        if (input.value.trim() === "") {
+          input.classList.add('input-error');
+          if (error) error.style.display = 'block';
+          allValid = false;
+        } else {
+          input.classList.remove('input-error');
+          if (error) error.style.display = 'none';
+        }
+      });
+
+      if (allValid) {
+        showStep(2);
+      }
+    }
+
+    function sendConditionalOtp() {
+      const firstNameInput = document.getElementById('productPlan');
+      const phoneInput = document.getElementById('adminMobile');
+      const otpStatus = document.getElementById('otpStatus');
+      const nameError = document.getElementById('nameError');
+      const mobileError = document.getElementById('mobileError');
+
+      const firstName = firstNameInput.value.trim();
+      const phoneRaw = phoneInput.value.trim();
+      const phoneValid = /^\d{10}$/.test(phoneRaw);
+
+      nameError.style.display = 'none';
+      mobileError.style.display = 'none';
+      firstNameInput.classList.remove('input-error');
+      phoneInput.classList.remove('input-error');
+
+      let valid = true;
+      if (!firstName) {
+        nameError.style.display = 'block';
+        firstNameInput.classList.add('input-error');
+        valid = false;
+      }
+      if (!phoneValid) {
+        mobileError.style.display = 'block';
+        phoneInput.classList.add('input-error');
+        valid = false;
+      }
+      if (!valid) return;
+
+      const payload = {
+        sender_id: "INDRAQ",
+        template_id: "187926",
+        firstName,
+        phone: "+91" + phoneRaw,
+        appName: "gnvisa"
+      };
+
+      fetch("https://otp.indraq.info/api/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            otpStatus.innerText = "OTP sent successfully!";
+            otpStatus.style.display = 'block';
+            otpStatus.style.color = 'green';
+            document.getElementById('otpSection').style.display = 'block';
+// Hide Send OTP button
+document.querySelector('.otp-buttons button').style.display = 'none';
+
+// Create Resend OTP if not already there
+let existing = document.getElementById("resendBtnWrapper");
+if (!existing) {
+  const wrapper = document.createElement("div");
+  wrapper.id = "resendBtnWrapper";
+  wrapper.style.marginTop = "10px";
+
+  const btn = document.createElement("button");
+  btn.id = "resendOtpBtn";
+  btn.disabled = true;
+  btn.innerText = "Resend OTP in 30s";
+  btn.style.opacity = 0.6;
+  btn.style.cursor = "not-allowed";
+  btn.onclick = () => {
+    btn.disabled = true;
+    btn.innerText = "Sending...";
+    btn.style.opacity = 0.6;
+    btn.style.cursor = "not-allowed";
+    sendConditionalOtp(); // reuse same logic
+  };
+
+  wrapper.appendChild(btn);
+  document.querySelector(".otp-buttons").appendChild(wrapper);
+}
+
+// Start countdown
+let timeLeft = 30;
+const resendBtn = document.getElementById("resendOtpBtn");
+resendBtn.disabled = true;
+resendBtn.innerText = `Resend OTP in ${timeLeft}s`;
+
+const interval = setInterval(() => {
+  timeLeft--;
+  if (timeLeft <= 0) {
+    clearInterval(interval);
+    resendBtn.disabled = false;
+    resendBtn.innerText = "🔄 Resend OTP";
+    resendBtn.style.opacity = 1;
+    resendBtn.style.cursor = "pointer";
+  } else {
+    resendBtn.innerText = `Resend OTP in ${timeLeft}s`;
+  }
+}, 1000);
+
+
+          } else {
+            otpStatus.style.display = 'none';
+            alert("Failed to send OTP: " + (data.message || "Unknown error"));
+          }
+        })
+        .catch(() => {
+          otpStatus.style.display = 'none';
+          alert("Server error while sending OTP.");
+        });
+    }
+
+function verifyUnifiedOtp() {
+  const phone = document.getElementById('adminMobile').value.trim();
+  const email = document.getElementById('adminEmail').value.trim();
+  const enteredOtp = document.getElementById('unifiedOtpInput').value.trim();
+  if (!enteredOtp) return;
+
+  // Hide popup form and show result card
+  document.getElementById('popup').style.display = 'none';
+  const resultCard = document.getElementById("otpResultCard");
+  resultCard.style.display = "block";
+  document.getElementById("otpLoader").style.display = "block";
+  document.getElementById("otpSuccess").style.display = "none";
+  document.getElementById("otpFail").style.display = "none";
+
+  fetch("https://otp.indraq.info/api/verify-otp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      phone: "+91" + phone,
+      otp: enteredOtp,
+      appName: "GNVISA"
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+    if (data.success) {
+  // ✅ Hide result card immediately
+  document.getElementById("otpResultCard").style.display = "none";
+
+  const payload = {
+    mobile: phone,
+    firstName: document.getElementById('CompanyFullName').value.trim(),
+    email: email,
+    Business_Plan: document.getElementById('productPlan').value.trim(),
+    address: document.getElementById('CompanyAddress').value.trim(),
+    pinCode: document.getElementById('CompanyCity').value.trim(),
+    country: document.getElementById('CompanyState').value.trim(),
+    state: document.getElementById('CompanyStateName').value.trim(),
+    city: document.getElementById('CompanyCityName').value.trim()
+  };
+
+  // 🌐 Send to webhook
+  fetch("https://n8n.indraq.info/webhook/fdc20e5f-f90e-4e6a-aea9-ea75669ba3a6", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+
+ .then(res => {
+  document.getElementById("otpLoader").style.display = "none";
+  if (res.ok) {
+    // ✅ OTP + webhook successful
+    Swal.fire({
+      icon: 'success',
+      title: 'Submitted!',
+      text: 'Your form has been successfully submitted.',
+      confirmButtonColor: '#28a745'
+    }).then(() => {
+      document.getElementById("otpResultCard").style.display = "none";
+    });
+  } else {
+    // ❌ Webhook failed
+    Swal.fire({
+      icon: 'error',
+      title: 'Error!',
+      text: 'Something went wrong while sending data.',
+      confirmButtonColor: '#d33'
+    }).then(() => {
+      document.getElementById("otpResultCard").style.display = "none";
+    });
+  }
+})
+.catch(() => {
+  document.getElementById("otpLoader").style.display = "none";
+  document.getElementById("otpResultCard").style.display = "none";
+
+  Swal.fire({
+    icon: 'error',
+    title: 'Error!',
+    text: 'Submission failed. Please contact 7245678796',
+    confirmButtonColor: '#d33'
+  });
+})
+
+
+
+.catch(() => {
+  document.getElementById("otpLoader").style.display = "none";
+  document.getElementById("otpResultCard").style.display = "none";
+
+  // ✅ Show your own styled error container
+  const container = document.getElementById("webhookErrorContainer");
+  const msg = document.getElementById("webhookErrorMessage");
+
+  container.style.display = "block";
+  msg.style.display = "block";
+  msg.textContent = "Webhook submission failed. Please try again or contact support.";
+});
+
+
+
+
+
+
+      } else {
+        document.getElementById("otpLoader").style.display = "none";
+        document.getElementById("otpFail").style.display = "block";
+        document.getElementById("failedUserData").textContent = "Invalid or expired OTP.";
+      }
+    })
+    .catch(err => {
+      document.getElementById("otpLoader").style.display = "none";
+      document.getElementById("otpFail").style.display = "block";
+      document.getElementById("failedUserData").textContent = err.message;
+    });
+}
+
+
+    document.querySelectorAll('.start-trial-btn').forEach(btn => {
+      btn.addEventListener('click', openPopup);
+    });
+
+    document.getElementById("CompanyCity").addEventListener("blur", function () {
+      const pin = this.value.trim();
+      if (!/^\d{6}$/.test(pin)) return;
+
+      fetch(`https://api.postalpincode.in/pincode/${pin}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data[0].Status === "Success") {
+            const postOffice = data[0].PostOffice[0];
+            document.getElementById("CompanyStateName").value = postOffice.State;
+            document.getElementById("CompanyCityName").value = postOffice.District;
+            document.getElementById("CompanyState").value = "India";
+          } else {
+            alert("Invalid Pin Code.");
+          }
+        })
+        .catch(() => {
+          alert("Error fetching data from Pin Code API.");
+        });
+    });
+  </script>
+</body>
+</html>
