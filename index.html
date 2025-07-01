@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndraQ Source Code</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/png" href="./Images/fav.png" />
+    <!-- fast scroll  -->
+
+    <script>
+        $(document).ready(function () {
+            gsap.registerPlugin(ScrollTrigger);
+
+            ScrollTrigger.create({
+                trigger: "#section2",
+                start: "top 50%", // when top of section2 hits 20% from top
+                end: "bottom top",
+                onEnter: () => {
+                    document.querySelector("#section3").scrollIntoView({
+                        behavior: "smooth"
+                    });
+                },
+                once: true // ensures it only triggers once
+            });
+        });
+    </script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1270350137609605');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1270350137609605&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
+</head>
+
+<body>
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <!-- <div class="logo">
+            <a href="/index.html">
+                <img src="/Images/" alt="Logo"/>
+            </a>
+        </div> -->
+
+
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="sidebar">
+            <button class="close-btn" onclick="toggleMenu()">&times;</button>
+            <li><a href="#section1"><i class=""></i> Section1</a></li>
+            <li><a href="#section2"><i class=""></i> Section2</a></li>
+            <li><a href="#section3"><i class=""></i> Section3</a></li>
+            <li><a href="#section4"><i class=""></i> Section4</a></li>
+            <li><a href="#section5"><i class=""></i> Section5</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- section 1 -->
+
+    <div class="container1" id="section1">
+        <div class="main">
+            <!-- Left Side Images -->
+            <div class="side-images left-images">
+                <div class="side-image">
+                    <img src="./Images/CRM.png" alt="Technology Image 1">
+                </div>
+                <div class="side-image">
+                    <img src="./Images/Delivery_App.png" alt="Technology Image 2">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="logo">
+                    <div class="logo-text"><img src="./Images/White_and_Orange.png" alt="">
+                    </div>
+                </div>
+                <div class="hero-sectionn">
+                    <h1 class="main-title">Own the Code. Run the Business</h1>
+                    <p class="subtitle">Get Lifetime Access to 5 Ready-to-Launch Tech Products. No subscriptions. No
+                        limits. Download, customize, and launch under your own brand — with 100% editable source code.
+                    </p>
+                    <button class="cta-button start-trial-btn">Explore Products</button>
+                    <button class="cta-button-secondary start-trial-btn">Learn More</button>
+                </div>
+            </div>
+
+            <!-- Right Side Images -->
+            <div class="side-images right-images">
+                <div class="side-image">
+                    <img src="./Images/ERP.png" alt="Technology Image 3">
+                </div>
+                <div class="side-image">
+                    <img src="./Images/School-ERP.png" alt="Technology Image 4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth hover effects and interactions
+        document.querySelectorAll('.side-image').forEach(image => {
+            image.addEventListener('mouseenter', function () {
+                this.style.zIndex = '10';
+            });
+
+            image.addEventListener('mouseleave', function () {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Add click handlers for CTA buttons
+        document.querySelector('.cta-button').addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('Explore Products clicked');
+            // Add your navigation logic here
+        });
+
+        document.querySelector('.cta-button-secondary').addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('Learn More clicked');
+            // Add your navigation logic here
+        });
+
+        // Add logo click handler
+        document.querySelector('.logo').addEventListener('click', function () {
+            console.log('IndraQ logo clicked');
+            // Add your home navigation logic here
+        });
+    </script>
+
+
+
+
+    <!-- section 2 -->
+
+
+
+    <section class="cb-hero-section" id="section2">
+        <div class="cb-main-container" style="max-width: 1200px;">
+            <div class="cb-hero-content">
+                <div class="cb-hero-text">
+                    <h1>Start Fast <br> Scale Faster</h1>
+                    <p>Stop wasting months building from zero. Our source codes are ready for you to deploy, rebrand, or
+                        expand, with full control and no hidden fees.</p>
+                    <button href="#cb-products" class="cb-primary-btn start-trial-btn">Explore Products</button>
+                </div>
+                <div class="cb-hero-visual">
+                    <div class="cb-laptop-wrapper">
+                        <img src="./Images/scale.gif" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- section 3 -->
+
+
+
+    <div class="uni-slider-wrapper" id="section3">
+        <main class="uni-hero-slider">
+            <div class="uni-slider-content">
+                <div class="uni-content-text">
+                    <h3 class="uni-location-region"></h3>
+                    <h1 class="uni-location-title"></h1>
+                    <p class="uni-location-description"></p>
+                    <a class="uni-discover-btn start-trial-btn" href="#popup">
+                        <span>Get Source Code</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="uni-slides-container"></div>
+
+        </main>
+
+        <div class="uni-slider-navigation">
+            <div class="uni-thumbnail-carousel">
+                <div class="uni-thumbnail-wrapper"></div>
+            </div>
+            <div class="uni-controls-container">
+                <button class="uni-nav-arrow uni-prev-arrow">&#8592;</button>
+                <button class="uni-nav-arrow uni-next-arrow">&#8594;</button>
+                <div class="uni-progress-bar-container">
+                    <div class="uni-progress-bar"></div>
+                </div>
+                <div class="uni-slide-counter">
+                    <span class="uni-current-slide-num"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slidesData = [
+                {
+                    region: 'Launch Your Own Food Delivery App',
+                    title: 'Smart Delivery Zomato / Swiggy / Blinkit Clone',
+                    description: 'Ready-to-deploy food/grocery delivery app for iOS, Android, and Web. Take orders, assign drivers, and track deliveries—all with your branding.',
+                    features: [
+                        '100% Editable Source Code',
+                        'Admin + Customer Apps',
+                        'Online Payment Integration',
+                        'No Subscription Fees Ever'
+                    ],
+                    // Use your actual image paths here
+                    image: './Images/back.webp', // Adjusted for column layout
+                    thumbnail: './Images/back.webp',
+                },
+                {
+                    region: 'Automate Your Business Ops',
+                    title: 'Business Suite',
+                    description: 'Full-featured CRM & billing suite. Manage customers, invoices, tasks, and more in one place. No subscription—buy once, use forever.',
+                    features: [
+                        'Complete CRM System',
+                        'Integrated Billing/Invoice Module',
+                        'Role-based Staff Access',
+                        'Lifetime Ownership'
+                    ],
+                    image: './Images/suite.webp', // Adjusted for column layout
+                    thumbnail: './Images/suite.webp',
+                    buttonText: 'Buy Source Code',
+                },
+                {
+                    region: 'Grow Customer Relationships',
+                    title: 'Customer Relationship Management',
+                    description: 'Advanced CRM to manage leads, clients, deals, calls, notes, and more. Track your entire customer journey and never miss a sales opportunity.',
+                    features: [
+                        'Lead & Deal Tracking',
+                        'Client Communication Logs',
+                        'Task & Reminder System',
+                        'Full Data Ownership'
+                    ],
+                    image: './Images/crm_2.webp', // Adjusted for column layout
+                    thumbnail: './Images/crm_2.webp',
+                    buttonText: 'Buy Source Code',
+                },
+                {
+                    region: 'Start Your Own EdTech Platform',
+                    title: 'School Management - ERP Platform',
+                    description: 'Manage students, fees, attendance, exams, parent communication and etc. Complete EdTech ERP source code—perfect for starting your own SaaS!',
+                    features: [
+                        'Student & Teacher Management',
+                        'Online Fee Payments',
+                        'Exam & Attendance Tracking',
+                        'Parent Communication Module and much more'
+                    ],
+                    image: './Images/school.webp', // Adjusted for column layout
+                    thumbnail: './Images/school.webp',
+                    buttonText: 'Get Source Code',
+                },
+                {
+                    region: 'Launch Logistics Like Delhivery',
+                    title: 'Logistics & Courier ERP',
+                    description: 'Complete logistics and warehouse management platform. Assign drivers, track shipments, and manage payments.',
+                    features: [
+                        'Driver & Shipment Tracking',
+                        'Warehouse Inventory Module',
+                        'Integrated Payment Management',
+                        'White-label License and much more'
+                    ],
+                    image: './Images/logistics.webp', // Adjusted for column layout
+                    thumbnail: './Images/logistics.webp',
+                    buttonText: 'Buy Source Code',
+                }
+            ];
+
+            const slidesContainer = document.querySelector('.uni-slides-container');
+            const thumbnailWrapper = document.querySelector('.uni-thumbnail-wrapper');
+            const contentText = document.querySelector('.uni-content-text');
+            const locationRegion = document.querySelector('.uni-location-region');
+            const locationTitle = document.querySelector('.uni-location-title');
+            const locationDescription = document.querySelector('.uni-location-description');
+            const discoverBtn = document.querySelector('.uni-discover-btn');
+            const discoverBtnSpan = discoverBtn.querySelector('span');
+            const prevBtn = document.querySelector('.uni-prev-arrow');
+            const nextBtn = document.querySelector('.uni-next-arrow');
+            const progressBar = document.querySelector('.uni-progress-bar');
+            const currentSlideNum = document.querySelector('.uni-current-slide-num');
+            const totalSlideCounter = document.querySelector('.uni-slide-counter');
+
+
+            let currentIndex = 0;
+            let slides = [];
+            let thumbnails = []; // Add this to store thumbnail elements
+            let autoPlayInterval;
+            const autoPlayTime = 5000; // 5 seconds
+
+            function init() {
+                slidesData.forEach((data, index) => {
+                    const slide = document.createElement('div');
+                    slide.classList.add('uni-slide');
+                    slide.style.backgroundImage = `url('${data.image}')`;
+                    slidesContainer.appendChild(slide);
+                    slides.push(slide);
+
+                    const thumbnail = document.createElement('div');
+                    thumbnail.classList.add('uni-thumbnail-card');
+                    thumbnail.style.backgroundImage = `url('${data.thumbnail}')`;
+                    thumbnail.innerHTML = `<h3 class="uni-thumbnail-title">${data.title}</h3>`;
+                    thumbnail.addEventListener('click', () => {
+                        goToSlide(index);
+                        resetAutoPlay();
+                    });
+                    thumbnailWrapper.appendChild(thumbnail);
+                    thumbnails.push(thumbnail); // Store the thumbnail element
+                });
+
+                // Set total slide count
+                totalSlideCounter.setAttribute('data-total-slides', String(slidesData.length).padStart(2, '0'));
+
+
+                goToSlide(0, true);
+                startAutoPlay();
+            }
+
+            function goToSlide(index, isInitial = false) {
+                if (index < 0) index = slidesData.length - 1;
+                else if (index >= slidesData.length) index = 0;
+
+                // Check if the slide is actually changing to avoid unnecessary animations
+                if (currentIndex === index && !isInitial) {
+                    return; // No change, do nothing
+                }
+
+                if (!isInitial) { // Only animate content if not initial load
+                    contentText.classList.add('animating-out'); // Start fade-out
+                    setTimeout(() => {
+                        currentIndex = index; // Update index after content starts fading out
+                        updateContent(); // Update content for new slide
+
+                        slides.forEach((s, i) => s.classList.remove('active')); // Deactivate all slides
+                        slides[currentIndex].classList.add('active'); // Activate current slide
+
+                        contentText.classList.remove('animating-out');
+                        contentText.classList.add('animating-in'); // Trigger fade-in
+                        setTimeout(() => {
+                            contentText.classList.remove('animating-in');
+                        }, 600);
+
+                        updateUI(); // <--- MOVE updateUI() HERE for non-initial loads
+                    }, 300); // Time for content to halfway fade out before updating
+                } else {
+                    // This is for the initial load
+                    currentIndex = index;
+                    updateContent();
+                    slides.forEach((s, i) => s.classList.remove('active'));
+                    slides[currentIndex].classList.add('active');
+                    updateUI(); // <--- Keep updateUI() here for initial loads
+                }
+            }
+            function updateContent() {
+                const data = slidesData[currentIndex];
+                locationRegion.textContent = data.region;
+                locationTitle.textContent = data.title;
+
+                let featuresHtml = '';
+                if (data.features && data.features.length) {
+                    featuresHtml = '<ul class="uni-feature-list">' +
+                        data.features.map(f => `<li>${f}</li>`).join('') +
+                        '</ul>';
+                }
+
+                locationDescription.innerHTML = `
+                    <div class="uni-description-main">${data.description}</div>
+                    ${featuresHtml}
+                `;
+
+                discoverBtnSpan.textContent = data.buttonText || 'Get Source Code';
+                discoverBtn.href = data.buttonUrl || '#popup';
+            }
+
+            function updateUI() {
+                // Update active thumbnail
+                thumbnails.forEach((thumb, i) => {
+                    if (i === currentIndex) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+
+                // Thumbnail carousel scroll
+                const thumbnailWidth = 120; // Must match CSS .uni-thumbnail-card min-width
+                const thumbnailGap = 15;    // Must match CSS .uni-thumbnail-wrapper gap
+
+                let scrollAmount = currentIndex * (thumbnailWidth + thumbnailGap);
+
+                // Logic to try and center the active thumbnail in the view
+                const carouselContainerWidth = thumbnailWrapper.parentElement.offsetWidth; // Get the visible width of the carousel area
+                const totalThumbnailsWidth = (thumbnailWidth + thumbnailGap) * thumbnails.length - thumbnailGap;
+
+                if (totalThumbnailsWidth > carouselContainerWidth) {
+                    // Calculate potential scroll to center active thumbnail
+                    const centerOffset = (carouselContainerWidth / 2) - (thumbnailWidth / 2);
+                    scrollAmount = currentIndex * (thumbnailWidth + thumbnailGap) - centerOffset;
+
+                    // Clamp scroll amount to prevent scrolling too far left or right
+                    scrollAmount = Math.max(0, Math.min(scrollAmount, totalThumbnailsWidth - carouselContainerWidth));
+                } else {
+                    scrollAmount = 0; // All thumbnails fit, no need to scroll
+                }
+
+                thumbnailWrapper.style.transform = `translateX(-${scrollAmount}px)`;
+
+
+                const progress = ((currentIndex + 1) / slidesData.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                currentSlideNum.textContent = String(currentIndex + 1).padStart(2, '0');
+            }
+
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(() => {
+                    goToSlide(currentIndex + 1);
+                }, autoPlayTime);
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                startAutoPlay();
+            }
+
+            nextBtn.addEventListener('click', () => {
+                goToSlide(currentIndex + 1);
+                resetAutoPlay();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                goToSlide(currentIndex - 1);
+                resetAutoPlay();
+            });
+
+            // Update UI on window resize to adjust thumbnail scrolling and layout
+            window.addEventListener('resize', updateUI);
+
+            init();
+        });
+    </script>
+
+
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            gsap.registerPlugin(ScrollTrigger);
+
+            ScrollTrigger.create({
+                trigger: "#section4",
+                start: "bottom 50%", // when top of section2 hits 20% from top
+                end: "top bottom",
+                onEnter: () => {
+                    document.querySelector("#section3").scrollIntoView({
+                        behavior: "smooth"
+                    });
+                },
+                once: true // ensures it only triggers once
+            });
+        });
+    </script>
+
+    <!-- section 4 -->
+    <div class="scroll-section-wrapper" id="section4">
+        <div class="horizontal-scroll-wrapper">
+            <!-- scroll 1-->
+
+            <section class="hero1-section">
+                <div class="hero1-content">
+                    <h1 class="hero-title">Smart Delivery App</h1>
+                    <p class="hero-subtitle">
+                        Jumpstart your food or grocery delivery business with ready-to-use source code. Launch instantly
+                        with built-in order management, driver assignments, and seamless payments—all fully branded for
+                        you.
+                    </p>
+                    <div class="cta-buttons ">
+                        <a href="#popup" class="btn-primary start-trial-btn">
+                            🚀 Get Source Code
+                        </a>
+                        <!-- <a href="#features" class="btn-secondary">
+                            Learn More
+                        </a> -->
+                    </div>
+                </div>
+
+
+                <div class="flex-1">
+                    <div class="phone-mockup_1">
+                        <img src="./Images/deliever_2.webp" alt="Mobile App Screenshot" class="phone-image">
+                    </div>
+                    <div class="phone-mockup_2">
+                        <img src="./Images/Delivery_3.webp" alt="Mobile App Screenshot" class="phone-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- scroll 2 -->
+            <section class="hero1-section">
+                <div class="hero1-content">
+                    <h1 class="hero-title">Business Suite</h1>
+                    <p class="hero-subtitle">
+                        Manage billing, staff, and daily operations from a single platform. Streamline invoices, track
+                        team activities, and stay on top of your business—all with your own fully-owned codebase.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn-primary start-trial-btn ">
+                            🚀 Get Source Code
+                        </a>
+
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <div class="phone-mockup_1">
+                        <img src="./Images/Business_suite.webp" alt="Mobile App Screenshot" class="phone-image">
+                    </div>
+                    <div class="phone-mockup_2">
+                        <img src="./Images/Business_3.webp" alt="Mobile App Screenshot" class="phone-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- scroll 3 -->
+            <section class="hero1-section">
+                <div class="hero1-content">
+                    <h1 class="hero-title"> School Management ERP</h1>
+                    <p class="hero-subtitle">
+                        Transform your school or coaching center with complete digital management. Handle admissions,
+                        fees, attendance, and communication effortlessly with a robust, easy-to-use system.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn-primary start-trial-btn ">
+                            🚀 Get Source Code
+                        </a>
+
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <div class="phone-mockup_1">
+                        <img src="./Images/School_2.webp" alt="Mobile App Screenshot" class="phone-image">
+                    </div>
+                    <div class="phone-mockup_2">
+
+                        <img src="./Images/school_3.webp" alt="Mobile App Screenshot" class="phone-image">
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- scroll 4 -->
+            <section class="hero1-section">
+                <div class="hero1-content">
+                    <h1 class="hero-title">Logistics & Courier ERP</h1>
+                    <p class="hero-subtitle">
+                        Power your own logistics or courier company with a scalable, integrated platform. Book
+                        shipments, assign drivers, and track deliveries—all with technology you control.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn-primary start-trial-btn ">
+                            🚀 Get Source Code
+                        </a>
+                        <!-- <a href="#features" class="btn-secondary">
+                            Learn More
+                        </a> -->
+                    </div>
+                </div>
+
+                <div class="flex-1">
+                    <div class="phone-mockup_1">
+                        <img src="./Images/logistics_2.webp" alt="Mobile App Screenshot" class="phone-image">
+                    </div>
+                    <div class="phone-mockup_2">
+                        <img src="./Images/Logistics_3.webp" alt="Mobile App Screenshot" class="phone-image">
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- scroll 5 -->
+            <section class="hero1-section">
+                <div class="hero1-content">
+                    <h1 class="hero-title">Custom CRM Suite</h1>
+                    <p class="hero-subtitle">
+                        Build lasting customer relationships with your own CRM. Track leads, manage clients, and never
+                        miss a follow-up—your data, your workflow, your code.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn-primary start-trial-btn ">
+                            🚀 Get Source Code
+                        </a>
+
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <div class="phone-mockup_1">
+                        <img src="./Images/CRM_1.webp" alt="Mobile App Screenshot" class="phone-image">
+                    </div>
+                    <div class="phone-mockup_2">
+                        <img src="./Images/CRM_3.webp" alt="Mobile App Screenshot" class="phone-image">
+
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const sections = gsap.utils.toArray(".hero1-section");
+            const wrapper = document.querySelector(".horizontal-scroll-wrapper");
+            const snapPoints = sections.map((_, i) => i / (sections.length - 1));
+
+            gsap.to(wrapper, {
+                xPercent: -100 * (sections.length - 1), // reversed direction
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".scroll-section-wrapper",
+                    pin: true,
+                    scrub: 1,
+                    snap: {
+                        // snap to the nearest value in snapPoints, but use direction to pick next/prev
+                        snapTo: snapPoints,
+                        duration: 0.5,
+                        ease: "power1.inOut",
+                        directional: true    // <— this flag makes it snap to next or previous based on scroll direction
+                    },
+                    end: () => "+=" + window.innerWidth * (sections.length - 1),
+                }
+            });
+        });
+    </script>
+
+
+    <!-- form section -->
+
+    <div id="demo-placeholder"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#demo-placeholder").load("./components/new-form.html");
+        });
+    </script>
+
+    <div class="footer">
+        <div class="foot-logo">
+            <a href="https://indraq.com" target="_blank"><img src="./Images/White_and_Orange.png" alt=""></a>
+        </div>
+        <div class="foot-info">
+            <h6>JTPL City, Mohali, Punjab, India, 140301 </h6>
+            <h6>+91 7888818668 | +91 7009211355</h6>
+            <h6>info@indraq.com</h6>
+        </div>
+
+        <p>All Rights Reserved 2025 | Designed and Developed by <a href="https://indraq.com" target="_blank"> IndraQ
+                Innovations Private Limited</a></p>
+    </div>
+
+
+
+    <!-- pop-up  -->
+    <!-- <button class="start-trial-btn"></button> -->
+
+    <div id="popup" class="popup-overlay">
+        <div class="popup-box">
+            <span class="close-bttn" onclick="closePopup()">×</span>
+
+            <div class="stepper">
+                <div class="step step-item-1 active">1<br><span>Company Info</span></div>
+                <div class="step step-item-2">2<br><span>Admin Contact</span></div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="form-step step-1">
+                <div class="form-row">
+                    <div>
+                        <label>👤 Full Name*</label>
+                        <input type="text" id="CompanyFullName" placeholder="Enter Full Name" />
+                        <p id="err_CompanyFullName" class="error-msg">Required</p>
+                    </div>
+                    <div>
+                        <label>📧 Email ID</label>
+                        <input type="email" id="adminEmail" placeholder="Enter Email Address" />
+                        <p id="err_adminEmail" class="error-msg">Required</p>
+                    </div>
+                </div>
+
+                <label>🏢 Address*</label>
+                <input type="text" id="CompanyAddress" placeholder="Enter Address" />
+                <p id="err_CompanyAddress" class="error-msg">Required</p>
+
+                <div class="form-row">
+                    <div>
+                        <label>📍 Pin Code*</label>
+                        <input type="text" id="CompanyCity" placeholder="Enter Pin Code" />
+                        <p id="err_CompanyCity" class="error-msg">Required</p>
+                    </div>
+                    <div>
+                        <label>🌍 Country*</label>
+                        <input type="text" id="CompanyState" placeholder="Country" readonly />
+                        <p id="err_CompanyState" class="error-msg">Required</p>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>🗺️ State*</label>
+                        <input type="text" id="CompanyStateName" placeholder="State" readonly />
+                        <p id="err_CompanyStateName" class="error-msg">Required</p>
+                    </div>
+                    <div>
+                        <label>🏙️ City*</label>
+                        <input type="text" id="CompanyCityName" placeholder="City" readonly />
+                        <p id="err_CompanyCityName" class="error-msg">Required</p>
+                    </div>
+                </div>
+
+                <button class="next-btn" onclick="goToStep2()">Next Step ➜</button>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="form-step step-2" style="display:none;">
+                <label>📱 Mobile Number</label>
+                <input type="tel" id="adminMobile" placeholder="Enter 10-digit Mobile Number" maxlength="10"
+                    pattern="\d{10}" oninput="this.value = this.value.replace(/\D/g, '')" />
+                <p id="mobileError" class="error-msg">Required</p>
+
+                <label>📦 Select Product*</label>
+                <select class="input-field" id="productPlan" required>
+                    <option value="">Select Product</option>
+                    <option value="Smart Delivery">Smart Delivery</option>
+                    <option value="Business Suite">Business Suite</option>
+                    <option value="CRM">CRM</option>
+                    <option value="School ERP">School ERP</option>
+                    <option value="Logistics ERP">Logistics ERP</option>
+                </select>
+                <p id="nameError" class="error-msg">Required</p>
+
+                <div class="otp-buttons">
+                    <button onclick="sendConditionalOtp()">🔐 Send OTP</button>
+                </div>
+
+                <div id="otpSection" style="display: none;">
+                    <label>🔑 Enter OTP*</label>
+                    <input type="text" id="unifiedOtpInput" placeholder="6-digit OTP" maxlength="6" />
+                    <p id="otpStatus" class="success-message">OTP sent successfully!</p>
+                    <p id="formSubmitStatus" class="success-message" style="display: none;"></p>
+                    <button class="next-btn" onclick="verifyUnifiedOtp()">✅ Verify OTP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OTP Result Card -->
+    <div id="otpResultCard"
+        style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: white; padding: 40px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.2); text-align: center; z-index: 9999;">
+        <span onclick="closeOtpResultCard()" style="
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+    z-index: 99999;">&times;</span>
+
+
+        <div id="otpLoader" style="display: block;">
+            <img src="https://cdn-icons-png.flaticon.com/512/189/189792.png" width="80" />
+            <h2 style="color: #333;">Verifying...</h2>
+            <p>🔄 Please wait while we verify your OTP.</p>
+        </div>
+
+
+        <div id="otpSuccess" style="display: none;">
+            <img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" width="80" />
+            <h2 style="color: green;">Successful!</h2>
+            <p>Your mobile number has been successfully verified.</p>
+        </div>
+
+        <div id="otpFail" style="display: none;">
+            <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" width="80" />
+            <h2 style="color: red;">Failed!</h2>
+            <p>OTP verification failed. Please try again.</p>
+            <pre id="failedUserData"
+                style="font-size: 12px; color: #444; text-align: left; background: #f8f8f8; padding: 10px;"></pre>
+        </div>
+    </div>
+
+    <!-- <div id="webhookErrorContainer">
+  <h3 style="color: red;">Submission Failed!</h3>
+  <p>Please Contact Admin: <strong>7245678796</strong></p>
+  <pre id="webhookErrorMessage">Webhook submission failed. Please try again or contact support.</pre>
+</div> -->
+
+
+
+    <script>
+        function openPopup() {
+            document.getElementById('popup').style.display = 'flex';
+            showStep(1);
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function closeOtpResultCard() {
+            document.getElementById("otpResultCard").style.display = "none";
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.style.display = 'none');
+            document.querySelector(`.step-${step}`).style.display = 'block';
+            document.querySelectorAll('.step').forEach((el, idx) => {
+                el.classList.toggle('active', idx + 1 === step);
+            });
+        }
+
+        function goToStep2() {
+            const fields = ['CompanyFullName', 'adminEmail', 'CompanyAddress', 'CompanyCity', 'CompanyState', 'CompanyStateName', 'CompanyCityName'];
+            let allValid = true;
+
+            fields.forEach(id => {
+                const input = document.getElementById(id);
+                const error = document.getElementById(`err_${id}`);
+
+                if (input.value.trim() === "") {
+                    input.classList.add('input-error');
+                    if (error) error.style.display = 'block';
+                    allValid = false;
+                } else {
+                    input.classList.remove('input-error');
+                    if (error) error.style.display = 'none';
+                }
+            });
+
+            if (allValid) {
+                showStep(2);
+            }
+        }
+
+        function sendConditionalOtp() {
+            const firstNameInput = document.getElementById('CompanyFullName');
+            const phoneInput = document.getElementById('adminMobile');
+            const otpStatus = document.getElementById('otpStatus');
+            const nameError = document.getElementById('nameError');
+            const mobileError = document.getElementById('mobileError');
+
+            const firstName = firstNameInput.value.trim();
+            const phoneRaw = phoneInput.value.trim();
+            const phoneValid = /^\d{10}$/.test(phoneRaw);
+
+            nameError.style.display = 'none';
+            mobileError.style.display = 'none';
+            firstNameInput.classList.remove('input-error');
+            phoneInput.classList.remove('input-error');
+
+            let valid = true;
+            if (!firstName) {
+                nameError.style.display = 'block';
+                firstNameInput.classList.add('input-error');
+                valid = false;
+            }
+            if (!phoneValid) {
+                mobileError.style.display = 'block';
+                phoneInput.classList.add('input-error');
+                valid = false;
+            }
+            if (!valid) return;
+
+            const payload = {
+                sender_id: "INDRAQ",
+                template_id: "187926",
+                firstName,
+                phone: "+91" + phoneRaw,
+                appName: "Source_Code_Landing_Page"
+            };
+
+            fetch("https://otp.indraq.info/api/send-otp", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        otpStatus.innerText = "OTP sent successfully!";
+                        otpStatus.style.display = 'block';
+                        otpStatus.style.color = 'green';
+                        document.getElementById('otpSection').style.display = 'block';
+
+
+                        // Hide Send OTP button
+                        document.querySelector('.otp-buttons button').style.display = 'none';
+
+                        // Create Resend OTP if not already there
+                        let existing = document.getElementById("resendBtnWrapper");
+                        if (!existing) {
+                            const wrapper = document.createElement("div");
+                            wrapper.id = "resendBtnWrapper";
+                            wrapper.style.marginTop = "10px";
+
+                            const btn = document.createElement("button");
+                            btn.id = "resendOtpBtn";
+                            btn.disabled = true;
+                            btn.innerText = "Resend OTP in 30s";
+                            btn.style.opacity = 0.6;
+                            btn.style.cursor = "not-allowed";
+                            btn.onclick = () => {
+                                btn.disabled = true;
+                                btn.innerText = "Sending...";
+                                btn.style.opacity = 0.6;
+                                btn.style.cursor = "not-allowed";
+                                sendConditionalOtp(); // reuse same logic
+                            };
+
+                            wrapper.appendChild(btn);
+                            document.querySelector(".otp-buttons").appendChild(wrapper);
+                        }
+
+                        // Start countdown
+                        let timeLeft = 30;
+                        const resendBtn = document.getElementById("resendOtpBtn");
+                        resendBtn.disabled = true;
+                        resendBtn.innerText = `Resend OTP in ${timeLeft}s`;
+
+                        const interval = setInterval(() => {
+                            timeLeft--;
+                            if (timeLeft <= 0) {
+                                clearInterval(interval);
+                                resendBtn.disabled = false;
+                                resendBtn.innerText = "🔄 Resend OTP";
+                                resendBtn.style.opacity = 1;
+                                resendBtn.style.cursor = "pointer";
+                            } else {
+                                resendBtn.innerText = `Resend OTP in ${timeLeft}s`;
+                            }
+                        }, 1000);
+                    } else {
+                        otpStatus.style.display = 'none';
+                        alert("Failed to send OTP: " + (data.message || "Unknown error"));
+                    }
+                })
+                .catch(() => {
+                    otpStatus.style.display = 'none';
+                    alert("Server error while sending OTP.");
+                });
+        }
+
+        function verifyUnifiedOtp() {
+            const phone = document.getElementById('adminMobile').value.trim();
+            const email = document.getElementById('adminEmail').value.trim();
+            const enteredOtp = document.getElementById('unifiedOtpInput').value.trim();
+            if (!enteredOtp) return;
+
+            // Hide popup form and show result card
+            document.getElementById('popup').style.display = 'none';
+            const resultCard = document.getElementById("otpResultCard");
+            resultCard.style.display = "block";
+            document.getElementById("otpLoader").style.display = "block";
+            document.getElementById("otpSuccess").style.display = "none";
+            document.getElementById("otpFail").style.display = "none";
+
+            fetch("https://otp.indraq.info/api/verify-otp", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    phone: "+91" + phone,
+                    otp: enteredOtp,
+                    appName: "Source_Code_Landing_Page"
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        // ✅ Hide result card immediately
+                        document.getElementById("otpResultCard").style.display = "none";
+
+                        const payload = {
+                            mobile: phone,
+                            firstName: document.getElementById('CompanyFullName').value.trim(),
+                            email: email,
+                            Business_Plan: document.getElementById('productPlan').value.trim(),
+                            address: document.getElementById('CompanyAddress').value.trim(),
+                            pinCode: document.getElementById('CompanyCity').value.trim(),
+                            country: document.getElementById('CompanyState').value.trim(),
+                            state: document.getElementById('CompanyStateName').value.trim(),
+                            city: document.getElementById('CompanyCityName').value.trim()
+                        };
+
+                        // 🌐 Send to webhook
+                        fetch("https://n8n.indraq.info/webhook/fdc20e5f-f90e-4e6a-aea9-ea75669ba3a6", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(payload)
+                        })
+
+                            .then(res => {
+                                document.getElementById("otpLoader").style.display = "none";
+                                if (res.ok) {
+                                    // ✅ OTP + webhook successful
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Submitted!',
+                                        text: 'Your form has been successfully submitted.',
+                                        confirmButtonColor: '#28a745'
+                                    }).then(() => {
+                                        document.getElementById("otpResultCard").style.display = "none";
+                                    });
+                                } else {
+                                    // ❌ Webhook failed
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error!',
+                                        text: 'Something went wrong while sending data.',
+                                        confirmButtonColor: '#d33'
+                                    }).then(() => {
+                                        document.getElementById("otpResultCard").style.display = "none";
+                                    });
+                                }
+                            })
+                            .catch(() => {
+                                document.getElementById("otpLoader").style.display = "none";
+                                document.getElementById("otpResultCard").style.display = "none";
+
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'Submission failed. Please contact 7245678796',
+                                    confirmButtonColor: '#d33'
+                                });
+                            })
+
+
+
+                            .catch(() => {
+                                document.getElementById("otpLoader").style.display = "none";
+                                document.getElementById("otpResultCard").style.display = "none";
+
+                                // ✅ Show your own styled error container
+                                const container = document.getElementById("webhookErrorContainer");
+                                const msg = document.getElementById("webhookErrorMessage");
+
+                                container.style.display = "block";
+                                msg.style.display = "block";
+                                msg.textContent = "Webhook submission failed. Please try again or contact support.";
+                            });
+
+
+
+
+
+
+                    } else {
+                        document.getElementById("otpLoader").style.display = "none";
+                        document.getElementById("otpFail").style.display = "block";
+                        document.getElementById("failedUserData").textContent = "Invalid or expired OTP.";
+                    }
+                })
+                .catch(err => {
+                    document.getElementById("otpLoader").style.display = "none";
+                    document.getElementById("otpFail").style.display = "block";
+                    document.getElementById("failedUserData").textContent = err.message;
+                });
+        }
+
+
+        document.querySelectorAll('.start-trial-btn').forEach(btn => {
+            btn.addEventListener('click', openPopup);
+        });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const pinInput = document.getElementById('CompanyCity');
+  pinInput.addEventListener('blur', async function () {
+    const pin = this.value.trim();
+    if (!/^\d{6}$/.test(pin)) return;
+    try {
+      const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+      const data = await res.json();
+      if (data[0].Status === "Success") {
+        const { State, District } = data[0].PostOffice[0];
+        document.getElementById('CompanyStateName').value = State;
+        document.getElementById('CompanyCityName').value = District;
+        document.getElementById('CompanyState').value = "India";
+      } else {
+        alert('Invalid Pin Code');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error fetching pin-code details');
+    }
+  });
+});
+    </script>
+
+
+
+
+</body>
+
+</html>
